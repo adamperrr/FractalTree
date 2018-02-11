@@ -13,40 +13,20 @@ public class TreeFrame implements ComponentListener
 
 		tree = new TreePanel();
 		frame.add(tree);
-		frame.setSize(400, 250);
+		frame.setSize(700, 500);
 		frame.setVisible(true);
 
 		frame.addComponentListener(this);
 	}
 
-	public void componentMoved(ComponentEvent e)
-	{
-		String text = " --- Moved";
-		// JOptionPane.showMessageDialog(frame, text, "Question",
-		// JOptionPane.WARNING_MESSAGE);
-	}
-
+	public void componentMoved(ComponentEvent e){}
 	public void componentResized(ComponentEvent e)
 	{
-		String text = " --- Resized ";
-		// JOptionPane.showMessageDialog(frame, text, "Question",
-		// JOptionPane.WARNING_MESSAGE);
 		tree.repaint();
 	}
 
-	public void componentShown(ComponentEvent e)
-	{
-		String text = " --- Shown";
-		// JOptionPane.showMessageDialog(frame, text, "Question",
-		// JOptionPane.WARNING_MESSAGE);
-	}
-
-	public void componentHidden(ComponentEvent e)
-	{
-		String text = " --- Hidden";
-		// JOptionPane.showMessageDialog(frame, text, "Question",
-		// JOptionPane.WARNING_MESSAGE);
-	}
+	public void componentShown(ComponentEvent e){}
+	public void componentHidden(ComponentEvent e){}
 	
 	private JFrame frame = null;
 	private TreePanel tree = null;
