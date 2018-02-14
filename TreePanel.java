@@ -9,10 +9,10 @@ public class TreePanel extends JPanel
 {
 	public TreePanel()
 	{
-		Line firstLine = new Line(new Point(0, 0), new Point(0, 100));
-		this.createTree(firstLine, 0.75, 30, 7);
+		startTreeCreation();
 	}
 
+	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -28,6 +28,28 @@ public class TreePanel extends JPanel
 		}
 	}
 
+	public void startTreeCreation()
+	{
+		lines = new LinkedList<Line>();
+		Line firstLine = new Line(new Point(0, 0), new Point(0, 100));
+		this.createTree(firstLine, ratio, angleDeg, levels);
+	}
+	
+	public void setRatio(int ratioPercent)
+	{
+		this.ratio = ratioPercent / 100.0;
+	}
+
+	public void setAngle(int angleDeg)
+	{
+		this.angleDeg = angleDeg;
+	}
+
+	public void setLevels(int levels)
+	{
+		this.levels = levels;
+	}
+	
 	private void createTree(Line line, double ratio, int angle_deg, int levels)
 	{
 		lines.add(line);
@@ -53,5 +75,9 @@ public class TreePanel extends JPanel
 		}
 	}
 
-	private final LinkedList<Line> lines = new LinkedList<Line>();
+	private LinkedList<Line> lines = new LinkedList<Line>();
+	
+	private double ratio = 0.75;
+	private int angleDeg = 30;
+	private int levels = 5;
 }
