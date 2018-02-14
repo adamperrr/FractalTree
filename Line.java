@@ -2,18 +2,19 @@ package FractalTree;
 
 import java.util.*;
 
-public class Line
+public class Line implements Cloneable
 {
-    public Line(Point pointA, Point pointB)
+    public Line(java.awt.Point pointA, java.awt.Point pointB)
     {
-        pointA_ = new Point(pointA);
-        pointB_ = new Point(pointB);
+        pointA_ = new java.awt.Point(pointA);
+        pointB_ = new java.awt.Point(pointB);
     }
 
-    public Line(Line line)
+    public Line clone()
     {
-        pointA_ = new Point( line.getA() );
-        pointB_ = new Point( line.getB() );
+      java.awt.Point pointA = new java.awt.Point( this.getA() );
+      java.awt.Point pointB = new java.awt.Point( this.getB() );
+    	return new Line(pointA, pointB);
     }
 
     public double getLength()
@@ -45,10 +46,10 @@ public class Line
 
     public void changeLinesLength(double ratio)
     {
-        int Ax = pointA_.getX();
-        int Ay = pointA_.getY();
-        int Bx = pointB_.getX();
-        int By = pointB_.getY();
+        int Ax = (int) pointA_.getX();
+        int Ay = (int) pointA_.getY();
+        int Bx = (int) pointB_.getX();
+        int By = (int) pointB_.getY();
 
         // Line's formula: y = a*x + b so:
         double a = (double)(Ay - By) / (double)(Ax - Bx);
@@ -60,40 +61,42 @@ public class Line
 
     public void moveOnXAxis(int dx)
     {
-        pointA_.moveOnXAxis(dx);
-        pointB_.moveOnXAxis(dx);
+        pointA_.translate(dx, 0);
+        pointB_.translate(dx, 0);
     }
 
-    public void moveOnYAxis(int dx)
+    public void moveOnYAxis(int dy)
     {
-        pointA_.moveOnYAxis(dx);
-        pointB_.moveOnYAxis(dx);
+      pointA_.translate(0, dy);
+      pointB_.translate(0, dy);
     }
 
-    public Point getA()
+    public java.awt.Point getA()
     {
         return pointA_;
     }
 
-    public Point getB()
+    public java.awt.Point getB()
     {
         return pointB_;
     }
 
     public String ToString()
     {
-        return "A: (" + pointA_.ToString() + "), B: (" + pointB_.ToString() + ")";
+        return "A: (" + pointA_.toString() + "), B: (" + pointB_.toString() + ")";
     }
 
-    private Point getBUsingLength(double a, double b, double newLengthSq)
+    private java.awt.Point getBUsingLength(double a, double b, double newLengthSq)
     {
-        int xA = pointA_.getX(), yA = pointA_.getY();
-        int xB = pointB_.getX(), yB = pointB_.getY();
+        int xA = (int) pointA_.getX();
+        int yA = (int) pointA_.getY();
+        int xB = (int) pointB_.getX();
+        int yB = (int) pointB_.getY();
 
-        Point result = null;
+        java.awt.Point result = null;
         if (xA == xB)
         {
-            result = new Point(xB, (int)Math.sqrt(newLengthSq) + yA);
+            result = new java.awt.Point(xB, (int)Math.sqrt(newLengthSq) + yA);
         }
         else
         {
@@ -108,8 +111,8 @@ public class Line
             double newXB_1 = (-coeffB - sqrtDelta) / (2.0 * coeffA);
             double newXB_2 = (-coeffB + sqrtDelta) / (2.0 * coeffA);
 
-            Point newB_1 = new Point((int)newXB_1, (int)(a * newXB_1 + b));
-            Point newB_2 = new Point((int)newXB_2, (int)(a * newXB_2 + b));
+            java.awt.Point newB_1 = new java.awt.Point((int)newXB_1, (int)(a * newXB_1 + b));
+            java.awt.Point newB_2 = new java.awt.Point((int)newXB_2, (int)(a * newXB_2 + b));
 
             double lengthNew1 = (new Line(pointB_, newB_1)).getLength();
             double lengthNew2 = (new Line(pointB_, newB_2)).getLength();
@@ -135,9 +138,9 @@ public class Line
         double newBPointX = differenceX * Math.cos(angle_rad) + differenceY * Math.sin(angle_rad) + (double)pointA_.getX();
         double newBPointY = -differenceX * Math.sin(angle_rad) + differenceY * Math.cos(angle_rad) + (double)pointA_.getY();
 
-        pointB_ = new Point((int)newBPointX, (int)newBPointY);
+        pointB_ = new java.awt.Point((int)newBPointX, (int)newBPointY);
     }
 
-    private Point pointA_ = null;
-    private Point pointB_ = null;
+    private java.awt.Point pointA_ = null;
+    private java.awt.Point pointB_ = null;
 }

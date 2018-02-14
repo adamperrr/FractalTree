@@ -23,8 +23,8 @@ public class TreePanel extends JPanel
 		{
 			Point A = line.getA();
 			Point B = line.getB();
-			g.drawLine(A.getX()+this.getWidth()/2, this.getHeight()-A.getY(),
-					B.getX()+this.getWidth()/2, this.getHeight()-B.getY());
+			g.drawLine((int)A.getX()+this.getWidth()/2, this.getHeight()-(int)A.getY(),
+					(int)B.getX()+this.getWidth()/2, this.getHeight()-(int)B.getY());
 		}
 	}
 
@@ -56,21 +56,21 @@ public class TreePanel extends JPanel
 
 		if (levels > 0)
 		{
-			int xB = line.getB().getX();
-			int yB = line.getB().getY();
+			int xB = (int) line.getB().getX();
+			int yB = (int) line.getB().getY();
 
-			Line left = new Line(line);
+			Line left = line.clone();
 			left.rotate(+angle_deg);
 			left.changeLinesLength(ratio);
-			left.moveOnXAxis(xB-left.getA().getX());
-			left.moveOnYAxis(yB-left.getA().getY());
+			left.moveOnXAxis((int)xB - (int)left.getA().getX());
+			left.moveOnYAxis((int)yB - (int)left.getA().getY());
 			createTree(left, ratio, angle_deg, levels - 1);
 
-			Line right = new Line(line);
+			Line right = line.clone();
 			right.rotate(-angle_deg);
 			right.changeLinesLength(ratio);
-			right.moveOnXAxis(xB-right.getA().getX());
-			right.moveOnYAxis(yB-right.getA().getY());
+			right.moveOnXAxis((int)xB - (int)right.getA().getX());
+			right.moveOnYAxis((int)yB - (int)right.getA().getY());
 			createTree(right, ratio, angle_deg, levels - 1);
 		}
 	}
