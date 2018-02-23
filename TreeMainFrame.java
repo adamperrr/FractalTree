@@ -148,7 +148,7 @@ public class TreeMainFrame extends JFrame
 			}
 		});
 
-		ratioNameLabel.setText("Ratio");
+		ratioNameLabel.setText("Ratio:");
 		ratioNameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
 		treePanel.setBackground(new java.awt.Color(255, 0, 0));
